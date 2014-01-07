@@ -11,7 +11,6 @@
 <?php include_stylesheets() ?>
 <?php
 use_helper('Javascript');
-use_javascript('jquery.min.js');
 use_javascript('jquery.tmpl.min.js');
 ?>
 <?php if (opConfig::get('enable_jsonapi') && opToolkit::isSecurePage()): ?>
@@ -55,17 +54,13 @@ var openpne = '.json_encode($jsonData).';
 </head>
 <body id="<?php printf('page_%s_%s', $view->getModuleName(), $view->getActionName()) ?>" class="<?php echo opToolkit::isSecurePage() ? 'secure_page' : 'insecure_page' ?>">
 <?php echo $op_config->get('pc_html_top2') ?>
-<div id="Body">
 <?php echo $op_config->get('pc_html_top') ?>
+<nav id="Header" class="navbar navbar-default navbar-static-top <?php if('friend' == $type): ?>navbar-inverse<?php endif; ?>">
+<?php include_partial('global/header') ?>
+</nav><!-- Header -->
+
 <div id="Container">
 <?php $type = sfConfig::get('sf_nav_type', sfConfig::get('mod_'.$module.'_default_nav', 'default')); ?>
-<div id="Header" class="navbar <?php if('friend' == $type): ?>navbar-inverse<?php endif; ?>">
-<div id="HeaderContainer" div class="navbar-inner">
-<div class="container">
-<?php include_partial('global/header') ?>
-</div>
-</div><!-- HeaderContainer -->
-</div><!-- Header -->
 
 <div id="Contents">
 <div id="ContentsContainer">
@@ -126,7 +121,7 @@ EOM;
 <?php include_component('default', 'sideBannerGadgets'); ?>
 <div class="dparts ad">
 <?php if (opConfig::get('opt_ad_free') == 0): ?>
-<?php 
+<?php
 echo <<<EOM
 <!-- pne_jp_side2 -->
 <div id='div-gpt-ad-1383195165288-0' style='width:160px; height:600px;'>
@@ -139,7 +134,7 @@ EOM;
 </div>
 
 <div class="dparts ad">
-<?php 
+<?php
 echo <<<EOM
 <script type="text/javascript"><!--
 google_ad_client = "ca-pub-5836291027790450";
@@ -182,6 +177,5 @@ document.getElementById("SmtSwitchLink").addEventListener("click", function() {
 <?php echo $op_config->get('pc_html_bottom2') ?>
 </div><!-- Container -->
 <?php echo $op_config->get('pc_html_bottom') ?>
-</div><!-- Body -->
 </body>
 </html>
